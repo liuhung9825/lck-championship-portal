@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bảng Xếp Hạng | LCK</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="lck-header">
+            <div class="nav-left">
+                <a href="/"><img src="/assets/images/lck.png" alt="LCK" class="logo-img"></a>
+                <nav class="nav-links">
+                    <a href="/">TRANG CHỦ</a>
+                    <a href="/lich-thi-dau">LỊCH THI ĐẤU</a>
+                    <a href="/bang-xep-hang" class="active">BẢNG XẾP HẠNG</a>
+                    <a href="#">DANH SÁCH ▼</a>
+                </nav>
+            </div>
+            <div class="nav-right">
+                <% if (user) { %>
+                    <span style="margin-right: 15px; font-family: 'Montserrat', sans-serif;">Admin: <%= user.username %></span>
+                    <a href="/logout" class="btn-login" style="background:#e74c3c; color:white;">ĐĂNG XUẤT</a>
+                <% } else { %>
+                    <a href="/login" class="btn-login">ĐĂNG NHẬP</a>
+                <% } %>
+            </div>
+        </header>
+
+        <h1 style="text-align:center; text-transform:uppercase; font-size: 40px; margin-bottom: 40px;">BẢNG XẾP HẠNG LCK 2026</h1>
+        
+        <table style="width:100%; background:white; color:black; border-radius:20px; border-collapse:collapse; overflow:hidden;">
+            <thead style="background:#002b5c; color:white;">
+                <tr>
+                    <th style="padding:20px; font-size: 20px;">HẠNG</th>
+                    <th style="text-align:left; font-size: 20px;">ĐỘI TUYỂN</th>
+                    <th style="font-size: 20px;">TRẬN</th>
+                    <th style="font-size: 20px;">THẮNG</th>
+                    <th style="font-size: 20px;">THUA</th>
+                    <th style="font-size: 20px;">HIỆU SỐ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rankings.forEach((t, i) => { %>
+                <tr style="text-align:center; border-bottom:1px solid #eee; font-family: 'Montserrat', sans-serif;">
+                    <td style="padding:20px; font-size:24px; font-weight:bold;"><%= i+1 %></td>
+                    <td style="text-align:left; display:flex; align-items:center; gap:15px; padding:15px;">
+                        <img src="/assets/images/<%= t.club_logo %>" width="45">
+                        <b style="font-size:24px;"><%= t.club_name %></b>
+                    </td>
+                    <td style="font-size:20px;"><%= t.matches_played %></td>
+                    <td style="color:green; font-weight:bold; font-size:20px;"><%= t.matches_won %></td>
+                    <td style="color:red; font-size:20px;"><%= t.matches_lost %></td>
+                    <td style="font-size:20px;"><%= t.score_diff %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
